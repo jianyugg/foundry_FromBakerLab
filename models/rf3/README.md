@@ -1,7 +1,10 @@
+# RosettaFold3 (RF3) Inference Guide
+# 本脚本经过修订，以适应本课题组使用需求
+
 # Inference with RosettaFold3(RF3)
 
 <div align="center">
-  <img src="../../docs/_static/prot_dna.png" alt="Protein-DNA complex prediction" width="400">
+  <img src="../../docs/_static/prot_dna.png" alt="Protein-DNA complex prediction" width="500">
 </div>
 
 > [!IMPORTANT]
