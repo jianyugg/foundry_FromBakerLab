@@ -5,11 +5,20 @@ RFD3 is a highly proficient protein binder designer. The following arguments hav
 - infer_ori_strategy: how RFD3 decides to place the origin of the generated protein binder with respect to the target. We find that using the "hotspots" strategy works best
 - select_hotspots: which atoms on the target should be bound (dictionary of residues on the target and atoms in those residues)
 
+In addition, we strongly recommend the following setting, which encourages the model to make more structured designs:
+- is_non_loopy: true
+
+We also recommend the following command-line overrides: `inference_sampler.step_scale=3` (defaults to 1.5) and
+`inference_sampler.gamma_0=0.2` (defaults to 0.6). Increasing the `step_scale` and decreasing `gamma_0` yields lower-temperature
+designs, which greatly increases PPI designability.
+
 If you would like to run the examples below, `protein_binder_design.json`, located in this directory, contains the example code. You can run it via:
 ```
 rfd3 design out_dir=inference_outputs/protein_binder/0 \
 ckpt_path=/path/to/rfd3_foundry_2025_12_01.ckpt \
-inputs=./protein_binder_design.json
+inputs=./protein_binder_design.json \
+inference_sampler.step_scale=3 \
+inference_sampler.gamma_0=0.2
 ```
 
 Or, if you have cloned the repo rather than using `pip install`:
@@ -17,7 +26,9 @@ Or, if you have cloned the repo rather than using `pip install`:
 python path/to/foundry/models/rfd3/src/rfd3/run_inference.py \
 out_dir=inference_outputs/protein_binder/0 \
 ckpt_path=/path/to/rfd3_foundry_2025_12_01.ckpt \
-inputs=./protein_binder_design.json 
+inputs=./protein_binder_design.json \
+inference_sampler.step_scale=3 \
+inference_sampler.gamma_0=0.2
 ```
 
 An example script for running these examples in batches is also provided in `run_inf_tutorial.sh`.
@@ -35,7 +46,8 @@ The input files for the different examples are provided in `foundry/models/rfd3/
             "E64": "CD2,CZ",
             "E88": "CG,CZ",
             "E96": "CD1,CZ",
-            }
+            },
+        "is_non_loopy": true
     },
     "pdl1": {
         "dialect": 2,
@@ -46,7 +58,8 @@ The input files for the different examples are provided in `foundry/models/rfd3/
             "A56": "CG,OH",
             "A115": "CG,SD",
             "A123": "CD2,OH",
-       }
+       },
+        "is_non_loopy": true
     }
 }
 ```

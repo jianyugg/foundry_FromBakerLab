@@ -4,12 +4,26 @@ Foundry provides tooling and infrastructure for using and training all classes o
 
 All models within Foundry rely on [AtomWorks](https://github.com/RosettaCommons/atomworks) - a unified framework for manipulating and processing biomolecular structures - for both training and inference. 
 
+
+> [!NOTE]
+> We have a slack now! Join for updates and to get your questions answered [here](https://join.slack.com/t/proteinmodelfoundry/shared_invite/zt-3kpwru8c6-nrmTW6LNHnSE7h16GNnfLA).
+
 ## Getting Started
 ### Quickstart guide
 **Installation**
 ```bash
-pip install rc-foundry[all]
+pip install "rc-foundry[all]"
 ```
+
+**Intel XPU Installation**
+
+For Intel XPU devices, install PyTorch with XPU support first, then install Foundry.
+```bash
+pip install torch --index-url https://download.pytorch.org/whl/xpu
+pip install "rc-foundry[all]"
+```
+> [!NOTE]
+> Use `pip` (not `uv`) for XPU installs since UV re-resolves dependencies and may replace your XPU torch with the standard PyPI version.
 
 **Downloading weights** Models can be downloaded to a target folder with:
 ```
